@@ -1,0 +1,6 @@
+*authApp
+*brokerApp
+*frontApp
+*loggerServiceApp
+
+db-data/
