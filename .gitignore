@@ -1,6 +1,15 @@
-*authApp
-*brokerApp
-*frontApp
-*loggerServiceApp
+# Service binaries
+authApp
+brokerApp
+frontApp
+loggerServiceApp
 
-db-data/
+# Add any missing service binaries
+authentication-service/authApp
+broker-service/brokerApp
+front-end/frontApp
+logger-service/loggerServiceApp
+mail-service/mailServiceApp
+
+# Database data directory
+project/db-data/
