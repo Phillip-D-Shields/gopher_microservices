@@ -9,7 +9,7 @@
             <a id="brokerBtn" class="btn btn-outline-secondary" href="javascript:void(0);">broker</a>
             <a id="authBtn" class="btn btn-outline-secondary" href="javascript:void(0);">auth</a>
             <a id="logBtn" class="btn btn-outline-secondary" href="javascript:void(0);">log</a>
-
+            <a id="mailBtn" class="btn btn-outline-secondary" href="javascript:void(0);">mail</a>
 
             <div id="output" class="mt-5" style="outline: 1px solid silver; padding: 2em;">
                 <span class="text-muted">Output shows here...</span>
@@ -38,6 +38,7 @@
     const brokerBtn = document.getElementById("brokerBtn");
     const authBtn = document.getElementById("authBtn");
     const logBtn = document.getElementById("logBtn");
+    const mailBtn = document.getElementById("mailBtn");
 
     let output = document.getElementById("output");
     let payload = document.getElementById("payload");
@@ -123,6 +124,40 @@
                     output.innerHTML += `<br><strong>Error</strong>: ${data.message}`;
                 } else {
                     output.innerHTML += `<br><strong>Response from auth service</strong>: ${data.message}`;
+                }
+            }).catch((error) => { output.innerHTML += `<br><br>Error: ${error}` });
+    })
+
+    mailBtn.addEventListener("click", function () {
+        const _payload = {
+            action: "mail",
+            mail: {
+                from: "me@example.com",
+                to: "you@example.com",
+                subject: "testing testing",
+                message: "kia ora whanau",
+            }
+        }
+
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        const body = {
+            method: "POST",
+            body: JSON.stringify(_payload),
+            headers: headers
+        }
+
+        fetch("http:\/\/localhost:8080/handle", body)
+            .then((response) => response.json())
+            .then((data) => {
+                payload.innerHTML = JSON.stringify(_payload, undefined, 4);
+                received.innerHTML = JSON.stringify(data, undefined, 4);
+
+                if (data.error) {
+                    output.innerHTML += `<br><strong>Error</strong>: ${data.message}`;
+                } else {
+                    output.innerHTML += `<br><strong>Response from mail service</strong>: ${data.message}`;
                 }
             }).catch((error) => { output.innerHTML += `<br><br>Error: ${error}` });
     })

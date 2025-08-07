@@ -3,13 +3,14 @@ authApp
 brokerApp
 frontApp
 loggerServiceApp
+mailerServiceApp
 
 # Add any missing service binaries
 authentication-service/authApp
 broker-service/brokerApp
 front-end/frontApp
 logger-service/loggerServiceApp
-mail-service/mailServiceApp
+mail-service/mailerServiceApp
 
 # Database data directory
 project/db-data/
